@@ -1,16 +1,26 @@
 /**
- * 正式環境啟動前：若尚無使用者則執行 seed（免 Railway Shell）
+ * 正式環境啟動：在 Volume 上建立 DB → 若無資料則 seed
+ * （Build 階段掛不了 Volume，不可在 build 做 db push）
  */
 import { execSync } from "child_process";
+import { mkdirSync } from "fs";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+function run(cmd) {
+  execSync(cmd, { stdio: "inherit", env: process.env });
+}
+
 try {
+  mkdirSync("./data", { recursive: true });
+  console.log("[ensure-seed] prisma db push …");
+  run("npx prisma db push --skip-generate");
+
   const count = await prisma.user.count();
   if (count === 0) {
-    console.log("[ensure-seed] 資料庫為空，執行 npm run db:seed …");
-    execSync("npm run db:seed", { stdio: "inherit" });
+    console.log("[ensure-seed] 資料庫為空，執行 seed …");
+    run("npm run db:seed");
   } else {
     console.log("[ensure-seed] 已有資料，略過 seed");
   }

@@ -33,8 +33,8 @@
    NODE_ENV=production
    ```
 3. **Settings** → **Deploy**：
-   - Build Command: `npm install && npx prisma db push && npm run build`
-   - Start Command: `npm start`
+   - Build Command: `npm run railway:build`（或 `npm install && npm run build`）
+   - Start Command: `npm start`（會自動 `db push` + 首次 seed，**不要在 build 做 db push**）
 4. 加 **Volume**（掛載持久化硬碟，資料庫才不會重開就消失）：
    - Mount Path: `/app/data`
    - 讓 `DATABASE_URL=file:./data/prod.db` 寫在這個目錄裡  
