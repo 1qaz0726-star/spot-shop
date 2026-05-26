@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #e85d04;
+  --color-brand-dark: #d00000;
+  --color-surface: #fafafa;
+  --color-ink: #1a1a1a;
+  --color-muted: #6b7280;
+  --font-sans: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: #fff;
+}
