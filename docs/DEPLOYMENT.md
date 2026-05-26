@@ -38,11 +38,10 @@
 4. 加 **Volume**（掛載持久化硬碟，資料庫才不會重開就消失）：
    - Mount Path: `/app/data`
    - 讓 `DATABASE_URL=file:./data/prod.db` 寫在這個目錄裡  
-5. 部署完成後，在 **Settings** 執行一次 Seed（可開 **Shell**）：
-   ```bash
-   npm run db:seed
-   ```
+5. 本專案啟動時會自動檢查資料庫，若為空會執行 `db:seed`（**不必找 Shell**）。
 6. Railway 會給一個網址，例如 `https://xxx.up.railway.app`，那就是你的商城。
+
+若需手動進容器：在畫布 **右鍵 spot-shop** → **Copy SSH Command**，本機安裝 [Railway CLI](https://docs.railway.com/cli) 後執行 `railway ssh`，再跑 `npm run db:seed`。
 
 ### 之後更新網站
 
