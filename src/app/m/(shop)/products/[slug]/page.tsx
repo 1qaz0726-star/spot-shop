@@ -1,6 +1,6 @@
 import { ProductImageGallery } from "@/components/product/ProductImageGallery";
-import { AddToCartButton } from "@/components/shared/AddToCartButton";
 import { MobileHeader } from "@/components/mobile/MobileHeader";
+import { MobileProductPurchaseBar } from "@/components/mobile/MobileProductPurchaseBar";
 import { getProductBySlug } from "@/services/product.service";
 import { formatPrice } from "@/lib/utils";
 import { notFound } from "next/navigation";
@@ -16,8 +16,8 @@ export default async function MobileProductPage({ params }: Props) {
     <>
       <MobileHeader title="商品詳情" backHref="/m" showBack />
 
-      {/* 底部留白：加入購物車列 + 底部 Tab，避免說明被擋住 */}
-      <div className="pb-[calc(8.5rem+env(safe-area-inset-bottom,0px))]">
+      {/* 留白 = 固定購買列高度（Tab 留白由 shop layout 處理） */}
+      <div className="pb-[var(--spacing-mobile-purchase)]">
         <ProductImageGallery images={product.images} alt={product.name} variant="mobile" />
 
         <div className="bg-white px-4 py-4">
@@ -43,13 +43,11 @@ export default async function MobileProductPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="fixed bottom-14 left-0 right-0 z-40 border-t border-gray-200 bg-white p-3 shadow-[0_-4px_12px_rgba(0,0,0,0.06)]">
-        <AddToCartButton
-          productId={product.id}
-          className="flex-1"
-          redirectToLogin={`/login?next=/m/products/${slug}`}
-        />
-      </div>
+      <MobileProductPurchaseBar
+        productId={product.id}
+        stock={product.stock}
+        slug={slug}
+      />
     </>
   );
 }

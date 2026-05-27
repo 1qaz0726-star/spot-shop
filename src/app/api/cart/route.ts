@@ -1,5 +1,5 @@
 import { getSession } from "@/lib/session";
-import { addToCart, getCart, updateCartQuantity } from "@/services/cart.service";
+import { addToCart, clearCart, getCart, updateCartQuantity } from "@/services/cart.service";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -13,6 +13,7 @@ export async function GET() {
 const addSchema = z.object({
   productId: z.string(),
   quantity: z.coerce.number().int().min(1).default(1),
+  buyNow: z.boolean().optional(),
 });
 
 const updateSchema = z.object({
@@ -30,6 +31,9 @@ export async function POST(req: Request) {
   }
 
   try {
+    if (parsed.data.buyNow) {
+      await clearCart(session.id);
+    }
     const item = await addToCart(session.id, parsed.data.productId, parsed.data.quantity);
     return NextResponse.json(item);
   } catch (e) {
