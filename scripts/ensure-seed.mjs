@@ -3,23 +3,29 @@
  * （Build 階段掛不了 Volume，不可在 build 做 db push）
  */
 import { execSync } from "child_process";
-import { mkdirSync } from "fs";
-import { PrismaClient } from "@prisma/client";
+import { applyRailwayDataPaths, logDataPaths } from "./data-path.mjs";
 
-const prisma = new PrismaClient();
+applyRailwayDataPaths();
+logDataPaths("ensure-seed");
 
 function run(cmd) {
   execSync(cmd, { stdio: "inherit", env: process.env });
 }
 
+const { PrismaClient } = await import("@prisma/client");
+const prisma = new PrismaClient();
+
 try {
-  mkdirSync("./data", { recursive: true });
-  mkdirSync("./data/uploads/products", { recursive: true });
   console.log("[ensure-seed] prisma db push …");
   run("npx prisma db push --skip-generate");
 
-  const count = await prisma.user.count();
-  if (count === 0) {
+  const [userCount, productCount] = await Promise.all([
+    prisma.user.count(),
+    prisma.product.count(),
+  ]);
+  console.log("[ensure-seed] 使用者數=", userCount, "| 商品數=", productCount);
+
+  if (userCount === 0) {
     console.log("[ensure-seed] 資料庫為空，執行 seed …");
     run("npm run db:seed");
   } else {

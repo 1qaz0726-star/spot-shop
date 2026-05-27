@@ -48,6 +48,12 @@
 
 改程式 → `git push` → Railway 會自動重新部署。
 
+### 已掛 Volume 但部署後商品仍消失？
+
+1. 點 **spot-shop 服務**（不是 Volume）→ **Variables**，確認有 `DATABASE_URL=file:./data/prod.db`（程式會依 `RAILWAY_VOLUME_MOUNT_PATH` 自動改寫成 Volume 內的 `prod.db`）。
+2. 部署日誌應出現 `[ensure-seed] 商品數= N`（N > 3 表示你的商品還在）；若每次都是「資料庫為空，執行 seed」且商品數只有 3，代表 DB 沒寫進 Volume，請檢查 Mount Path 是否為 **`/app/data`**。
+3. **不要**在 Volume 設定按「Wipe Volume」，會清空所有正式資料。
+
 ---
 
 ## 推薦方式二：Vercel（Next.js 官方最常見）
