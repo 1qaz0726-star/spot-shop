@@ -10,7 +10,7 @@ export default async function SellerLayout({ children }: { children: React.React
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <aside className="fixed left-0 top-0 flex h-full w-56 flex-col border-r border-gray-200 bg-white">
+      <aside className="fixed left-0 top-0 hidden h-full w-56 flex-col border-r border-gray-200 bg-white md:flex">
         <div className="border-b border-gray-100 p-4">
           <p className="text-xs text-gray-500">賣家中心</p>
           <p className="font-semibold">{session.name}</p>
@@ -32,7 +32,7 @@ export default async function SellerLayout({ children }: { children: React.React
           </Link>
         </div>
       </aside>
-      <main className="ml-56 min-h-screen p-8">{children}</main>
+      <main className="min-h-screen p-4 md:ml-56 md:p-8">{children}</main>
     </div>
   );
 }

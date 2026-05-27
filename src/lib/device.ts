@@ -12,19 +12,21 @@ export function isMobilePath(pathname: string): boolean {
 }
 
 export function shouldSkipViewportRouting(pathname: string): boolean {
-  const SKIP = ["/api", "/seller", "/login", "/_next", "/favicon"];
+  const SKIP = ["/api", "/login", "/_next", "/favicon"];
   return SKIP.some((p) => pathname.startsWith(p));
 }
 
 export function toMobilePath(pathname: string): string {
   if (pathname === "/") return "/m";
   if (pathname.startsWith("/m")) return pathname;
-  if (shouldSkipViewportRouting(pathname)) return pathname;
+  if (pathname.startsWith("/api") || pathname.startsWith("/login")) return pathname;
+  if (pathname.startsWith("/seller")) return `/m${pathname}`;
   return `/m${pathname}`;
 }
 
 export function toDesktopPath(pathname: string): string {
   if (!pathname.startsWith("/m")) return pathname;
+  if (pathname.startsWith("/m/seller")) return pathname.slice(2);
   const rest = pathname.slice(2) || "/";
   return rest === "/" ? "/" : rest;
 }

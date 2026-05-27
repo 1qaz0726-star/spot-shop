@@ -18,7 +18,7 @@ export default async function DesktopHomePage({ searchParams }: Props) {
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-8">
-      <section className="mb-6 flex items-center justify-between gap-6 overflow-hidden rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-5 text-white">
+      <section className="mb-6 flex items-center justify-between gap-6 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-8 py-5 text-white">
         <div className="min-w-0">
           <p className="text-xs font-medium uppercase tracking-wider opacity-90">Spot Shop</p>
           <h1 className="mt-1 text-xl font-bold md:text-2xl">常態現貨 · 快速出貨</h1>
@@ -28,7 +28,7 @@ export default async function DesktopHomePage({ searchParams }: Props) {
         </div>
         <Link
           href="#products"
-          className="shrink-0 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-orange-600 hover:bg-orange-50"
+          className="shrink-0 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50"
         >
           立即選購
         </Link>

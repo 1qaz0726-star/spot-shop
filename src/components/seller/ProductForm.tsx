@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { ProductImageUpload } from "@/components/seller/ProductImageUpload";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,24 +18,27 @@ type ProductFormData = {
 type Props = {
   productId?: string;
   initial?: Partial<ProductFormData>;
+  productsListPath?: string;
 };
 
-export function ProductForm({ productId, initial }: Props) {
+export function ProductForm({
+  productId,
+  initial,
+  productsListPath = "/seller/products",
+}: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [imageInput, setImageInput] = useState(
-    initial?.images?.join("\n") ?? ""
-  );
+  const [images, setImages] = useState<string[]>(initial?.images ?? []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (images.length === 0) {
+      alert("請至少上傳一張商品圖片");
+      return;
+    }
+
     setLoading(true);
     const fd = new FormData(e.currentTarget);
-
-    const images = imageInput
-      .split("\n")
-      .map((s) => s.trim())
-      .filter(Boolean);
 
     const body = {
       name: String(fd.get("name")),
@@ -62,7 +66,7 @@ export function ProductForm({ productId, initial }: Props) {
       return;
     }
 
-    router.push("/seller/products");
+    router.push(productsListPath);
     router.refresh();
   }
 
@@ -70,13 +74,13 @@ export function ProductForm({ productId, initial }: Props) {
     if (!productId || !confirm("確定刪除此商品？")) return;
     const res = await fetch(`/api/products/${productId}`, { method: "DELETE" });
     if (res.ok) {
-      router.push("/seller/products");
+      router.push(productsListPath);
       router.refresh();
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-2xl space-y-5 rounded-xl bg-white p-6 shadow-sm">
+    <form onSubmit={onSubmit} className="max-w-2xl space-y-5 rounded-xl bg-white p-4 shadow-sm md:p-6">
       <div>
         <label className="text-sm font-medium">商品名稱</label>
         <input
@@ -142,17 +146,13 @@ export function ProductForm({ productId, initial }: Props) {
         </select>
       </div>
       <div>
-        <label className="text-sm font-medium">圖片網址（每行一張）</label>
-        <textarea
-          value={imageInput}
-          onChange={(e) => setImageInput(e.target.value)}
-          rows={4}
-          className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-xs"
-          placeholder="https://images.unsplash.com/..."
-        />
+        <label className="text-sm font-medium">商品圖片</label>
+        <div className="mt-2">
+          <ProductImageUpload value={images} onChange={setImages} />
+        </div>
       </div>
       <div className="flex gap-3">
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading || images.length === 0}>
           {loading ? "儲存中…" : "儲存"}
         </Button>
         {productId && (

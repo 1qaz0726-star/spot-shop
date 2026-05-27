@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { isMobileViewport, toMobilePath } from "@/lib/device";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
@@ -34,12 +35,14 @@ function LoginForm() {
     }
 
     const { user } = await res.json();
+    const mobile = typeof window !== "undefined" && isMobileViewport(window.innerWidth);
+
     if (user.role === "SELLER" && next.startsWith("/seller")) {
-      router.push(next);
+      router.push(mobile ? toMobilePath(next) : next);
     } else if (user.role === "SELLER") {
-      router.push("/seller");
+      router.push(mobile ? "/m/seller" : "/seller");
     } else {
-      router.push(next);
+      router.push(mobile && !next.startsWith("/m") ? toMobilePath(next) : next);
     }
     router.refresh();
   }

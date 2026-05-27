@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 type Props = { params: Promise<{ id: string }> };
 
-export default async function EditProductPage({ params }: Props) {
+export default async function MobileEditProductPage({ params }: Props) {
   const session = await getSession();
   const { id } = await params;
   const product = session ? await getSellerProduct(session.id, id) : null;
@@ -13,10 +13,10 @@ export default async function EditProductPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">編輯商品</h1>
+      <h1 className="mb-4 text-lg font-bold">編輯商品</h1>
       <ProductForm
         productId={product.id}
-        productsListPath="/seller/products"
+        productsListPath="/m/seller/products"
         initial={{
           name: product.name,
           description: product.description,

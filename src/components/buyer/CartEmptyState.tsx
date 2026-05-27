@@ -11,7 +11,7 @@ type Props = {
 export function CartEmptyState({ shopHref, loginHref = "/login", showLogin }: Props) {
   return (
     <div className="flex flex-col items-center px-6 py-16 text-center">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-50">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-brand-light)]">
         <ShoppingBag className="h-8 w-8 text-[var(--color-brand)]" />
       </div>
       <p className="mt-4 font-medium text-gray-800">購物車是空的</p>

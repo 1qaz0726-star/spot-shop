@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
+/* Spot Shop 品牌色：靛青主色（避開蝦皮橘） */
 @theme {
-  --color-brand: #e85d04;
-  --color-brand-dark: #d00000;
-  --color-surface: #fafafa;
-  --color-ink: #1a1a1a;
-  --color-muted: #6b7280;
+  --color-brand: #4f46e5;
+  --color-brand-dark: #4338ca;
+  --color-brand-light: #eef2ff;
+  --color-accent: #059669;
+  --color-accent-light: #ecfdf5;
+  --color-surface: #f8fafc;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
   --font-sans: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 

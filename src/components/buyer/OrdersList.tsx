@@ -28,7 +28,7 @@ export function OrdersList({ orders }: Props) {
                 <p className="text-sm text-gray-600">共 {o.itemCount} 件</p>
               </div>
             </div>
-            <span className="rounded-full bg-orange-50 px-3 py-1 text-sm text-orange-700">
+            <span className="rounded-full bg-[var(--color-brand-light)] px-3 py-1 text-sm text-[var(--color-brand-dark)]">
               {ORDER_STATUS_LABEL[o.status]}
             </span>
           </div>

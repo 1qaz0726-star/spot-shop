@@ -27,7 +27,7 @@ export default async function MobileAccountPage() {
         </div>
       ) : (
         <>
-          <div className="bg-gradient-to-r from-orange-500 to-red-500 px-4 py-6 text-white">
+          <div className="bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-6 text-white">
             <p className="text-lg font-bold">{session.name}</p>
             <p className="text-sm opacity-90">{session.email}</p>
           </div>
@@ -46,7 +46,7 @@ export default async function MobileAccountPage() {
             ))}
             {session.role === "SELLER" && (
               <li className="border-b border-gray-50">
-                <Link href="/seller" className="flex items-center justify-between px-4 py-4 text-sm">
+                <Link href="/m/seller" className="flex items-center justify-between px-4 py-4 text-sm">
                   賣家中心
                   <ChevronRight className="h-4 w-4 text-gray-400" />
                 </Link>

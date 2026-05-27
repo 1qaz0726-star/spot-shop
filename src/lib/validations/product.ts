@@ -1,4 +1,10 @@
+import { isAllowedImageUrl } from "@/lib/upload";
 import { z } from "zod";
+
+const imageSchema = z
+  .string()
+  .min(1)
+  .refine(isAllowedImageUrl, "圖片格式無效");
 
 export const productCreateSchema = z.object({
   name: z.string().min(1, "請輸入商品名稱").max(120),
@@ -7,7 +13,7 @@ export const productCreateSchema = z.object({
   stock: z.coerce.number().int().min(0),
   category: z.string().max(60).optional(),
   status: z.enum(["DRAFT", "ACTIVE", "ARCHIVED"]),
-  images: z.array(z.string().url("圖片須為有效網址")).min(1, "至少一張圖片"),
+  images: z.array(imageSchema).min(1, "至少一張圖片"),
 });
 
 export const productUpdateSchema = productCreateSchema.partial().extend({

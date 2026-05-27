@@ -6,7 +6,7 @@ export function MobileHomeServices() {
   return (
     <Link
       href="/m"
-      className="flex items-center gap-2 border-b border-orange-600/10 bg-gradient-to-r from-[#ee4d2d] to-[#f05d40] px-3 py-2 text-white active:opacity-90"
+      className="flex items-center gap-2 border-b border-indigo-900/10 bg-gradient-to-r from-indigo-600 to-violet-600 px-3 py-2 text-white active:opacity-90"
     >
       <span className="shrink-0 rounded bg-white/25 px-1.5 py-0.5 text-[10px] font-bold leading-none">
         公告

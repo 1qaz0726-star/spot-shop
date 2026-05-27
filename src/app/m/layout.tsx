@@ -1,10 +1,3 @@
-import { MobileTabBar } from "@/components/mobile/MobileTabBar";
-
-export default function MobileLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {children}
-      <MobileTabBar />
-    </div>
-  );
+export default function MobileRootLayout({ children }: { children: React.ReactNode }) {
+  return <div className="min-h-screen bg-gray-50">{children}</div>;
 }

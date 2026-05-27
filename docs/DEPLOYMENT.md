@@ -31,13 +31,14 @@
    DATABASE_URL=file:./data/prod.db
    SESSION_SECRET=請改成一組很長的隨機英文數字
    NODE_ENV=production
+   UPLOAD_DIR=/app/data/uploads
    ```
 3. **Settings** → **Deploy**：
    - Build Command: `npm run railway:build`（或 `npm install && npm run build`）
    - Start Command: `npm start`（會自動 `db push` + 首次 seed，**不要在 build 做 db push**）
 4. 加 **Volume**（掛載持久化硬碟，資料庫才不會重開就消失）：
    - Mount Path: `/app/data`
-   - 讓 `DATABASE_URL=file:./data/prod.db` 寫在這個目錄裡  
+   - 讓資料庫與上傳圖片都寫在這個目錄（`prod.db`、`uploads/products/`）  
 5. 本專案啟動時會自動檢查資料庫，若為空會執行 `db:seed`（**不必找 Shell**）。
 6. Railway 會給一個網址，例如 `https://xxx.up.railway.app`，那就是你的商城。
 

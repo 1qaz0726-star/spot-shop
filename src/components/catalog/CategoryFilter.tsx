@@ -42,7 +42,7 @@ export function CategoryFilter({ categories, basePath, variant = "desktop" }: Pr
               "shrink-0 rounded-full border text-sm transition",
               variant === "mobile" ? "px-3 py-1 text-xs" : "px-4 py-1.5",
               active
-                ? "border-[var(--color-brand)] bg-orange-50 font-medium text-[var(--color-brand)]"
+                ? "border-[var(--color-brand)] bg-[var(--color-brand-light)] font-medium text-[var(--color-brand)]"
                 : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
             )}
           >

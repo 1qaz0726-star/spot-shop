@@ -1,7 +1,7 @@
+import { ProductImageGallery } from "@/components/product/ProductImageGallery";
 import { AddToCartButton } from "@/components/shared/AddToCartButton";
 import { getProductBySlug } from "@/services/product.service";
 import { formatPrice } from "@/lib/utils";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Truck, Shield, RotateCcw } from "lucide-react";
 
@@ -12,27 +12,10 @@ export default async function DesktopProductPage({ params }: Props) {
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const mainImage = product.images[0]?.url;
-
   return (
     <div className="mx-auto max-w-7xl px-6 py-10">
       <div className="grid gap-12 lg:grid-cols-2">
-        <div>
-          <div className="relative aspect-square overflow-hidden rounded-2xl bg-white shadow-sm">
-            {mainImage && (
-              <Image src={mainImage} alt={product.name} fill className="object-cover" priority sizes="50vw" />
-            )}
-          </div>
-          {product.images.length > 1 && (
-            <div className="mt-4 flex gap-3">
-              {product.images.map((img) => (
-                <div key={img.id} className="relative h-20 w-20 overflow-hidden rounded-lg border border-gray-200">
-                  <Image src={img.url} alt="" fill className="object-cover" sizes="80px" />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <ProductImageGallery images={product.images} alt={product.name} variant="desktop" />
 
         <div>
           {product.category && (

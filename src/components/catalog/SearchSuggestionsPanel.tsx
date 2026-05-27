@@ -76,7 +76,7 @@ export function SearchSuggestionsPanel({
       {showHot && (
         <section className="px-3 pt-2">
           <span className="mb-2 flex items-center gap-1.5 px-1 text-xs font-semibold text-gray-500">
-            <Flame className="h-3.5 w-3.5 text-orange-500" />
+            <Flame className="h-3.5 w-3.5 text-[var(--color-brand)]" />
             熱門搜尋
           </span>
           <div className="flex flex-wrap gap-2 px-1 pb-1">
@@ -86,7 +86,7 @@ export function SearchSuggestionsPanel({
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => onSelect(term)}
-                className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 transition hover:border-orange-200 hover:bg-orange-50 hover:text-[var(--color-brand)]"
+                className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 transition hover:border-indigo-200 hover:bg-[var(--color-brand-light)] hover:text-[var(--color-brand)]"
               >
                 {term}
               </button>

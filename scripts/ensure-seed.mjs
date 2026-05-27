@@ -14,6 +14,7 @@ function run(cmd) {
 
 try {
   mkdirSync("./data", { recursive: true });
+  mkdirSync("./data/uploads/products", { recursive: true });
   console.log("[ensure-seed] prisma db push …");
   run("npx prisma db push --skip-generate");
 
