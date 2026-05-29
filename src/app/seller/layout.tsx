@@ -1,3 +1,4 @@
+import { BRAND } from "@/lib/brand";
 import { getSession } from "@/lib/session";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -12,8 +13,9 @@ export default async function SellerLayout({ children }: { children: React.React
     <div className="min-h-screen bg-gray-100">
       <aside className="fixed left-0 top-0 hidden h-full w-56 flex-col border-r border-gray-200 bg-white md:flex">
         <div className="border-b border-gray-100 p-4">
-          <p className="text-xs text-gray-500">賣家中心</p>
-          <p className="font-semibold">{session.name}</p>
+          <p className="text-xs font-medium text-[var(--color-brand)]">{BRAND.nameZh}</p>
+          <p className="text-[10px] text-gray-400">{BRAND.nameEn} · 賣家中心</p>
+          <p className="mt-1 font-semibold">{session.name}</p>
         </div>
         <nav className="flex-1 space-y-1 p-3 text-sm">
           <Link href="/seller" className="block rounded-lg px-3 py-2 hover:bg-gray-50">
@@ -28,7 +30,7 @@ export default async function SellerLayout({ children }: { children: React.React
         </nav>
         <div className="border-t border-gray-100 p-3 text-sm">
           <Link href="/" className="text-[var(--color-brand)] hover:underline">
-            返回商城
+            返回 {BRAND.nameZh}
           </Link>
         </div>
       </aside>

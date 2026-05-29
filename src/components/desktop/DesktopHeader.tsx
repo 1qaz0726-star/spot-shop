@@ -1,4 +1,5 @@
 import { HeaderSearch } from "@/components/catalog/HeaderSearch";
+import { BRAND } from "@/lib/brand";
 import { getSession } from "@/lib/session";
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
@@ -9,11 +10,13 @@ export async function DesktopHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-6 px-6">
-        <Link
-          href="/"
-          className="shrink-0 text-lg font-bold tracking-tight text-[var(--color-brand)]"
-        >
-          現貨商城
+        <Link href="/" className="shrink-0 leading-tight">
+          <span className="block text-lg font-bold tracking-tight text-[var(--color-brand)]">
+            {BRAND.nameZh}
+          </span>
+          <span className="block text-[10px] font-medium tracking-widest text-[var(--color-muted)]">
+            {BRAND.nameEn}
+          </span>
         </Link>
         <div className="flex min-w-0 flex-1 justify-center px-2">
           <HeaderSearch />
@@ -37,7 +40,10 @@ export async function DesktopHeader() {
             </Link>
           )}
           {session?.role === "SELLER" && (
-            <Link href="/seller" className="rounded-full bg-gray-900 px-3 py-1 text-white hover:bg-gray-800">
+            <Link
+              href="/seller"
+              className="rounded-full bg-[var(--color-brand-dark)] px-3 py-1 text-white hover:bg-[var(--color-brand)]"
+            >
               賣家中心
             </Link>
           )}

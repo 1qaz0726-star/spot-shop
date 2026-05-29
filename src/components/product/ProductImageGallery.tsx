@@ -115,7 +115,7 @@ export function ProductImageGallery({ images, alt, variant = "desktop" }: Props)
                 "relative shrink-0 overflow-hidden rounded-lg border-2 transition",
                 isMobile ? "h-16 w-16" : "h-20 w-20",
                 i === index
-                  ? "border-[var(--color-brand)] ring-2 ring-indigo-200"
+                  ? "border-[var(--color-brand)] ring-2 ring-[var(--color-brand-light)]"
                   : "border-gray-200 opacity-70 hover:opacity-100"
               )}
               aria-label={`查看圖片 ${i + 1}`}

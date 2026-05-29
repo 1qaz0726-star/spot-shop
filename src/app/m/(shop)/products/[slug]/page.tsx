@@ -1,4 +1,5 @@
 import { ProductImageGallery } from "@/components/product/ProductImageGallery";
+import { BRAND } from "@/lib/brand";
 import { MobileHeader } from "@/components/mobile/MobileHeader";
 import { MobileProductPurchaseBar } from "@/components/mobile/MobileProductPurchaseBar";
 import { getProductBySlug } from "@/services/product.service";
@@ -31,7 +32,7 @@ export default async function MobileProductPage({ params }: Props) {
           <ul className="mt-2 space-y-1 text-gray-600">
             <li>· 現貨 1–2 工作日出貨</li>
             <li>· 7 天鑑賞期（未拆封）</li>
-            <li>· 客服 LINE @spotshop</li>
+            <li>· 客服 LINE {BRAND.contact.line}</li>
           </ul>
         </div>
 

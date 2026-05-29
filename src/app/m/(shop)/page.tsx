@@ -1,5 +1,6 @@
 import { CatalogToolbar } from "@/components/catalog/CatalogToolbar";
 import { ProductListing } from "@/components/catalog/ProductListing";
+import { BRAND } from "@/lib/brand";
 import { MobileHeader } from "@/components/mobile/MobileHeader";
 import { MobileHomeServices } from "@/components/mobile/MobileHomeServices";
 import { MobileSearchSection } from "@/components/mobile/MobileSearchSection";
@@ -21,7 +22,7 @@ export default async function MobileHomePage({ searchParams }: Props) {
 
   return (
     <>
-      <MobileHeader title="現貨商城" />
+      <MobileHeader title={BRAND.nameZh} />
       <MobileSearchSection catalogPath="/m" />
       <MobileHomeServices />
       <CatalogToolbar categories={categories} basePath="/m" variant="mobile" />

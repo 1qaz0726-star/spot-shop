@@ -86,7 +86,7 @@ export function SearchSuggestionsPanel({
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => onSelect(term)}
-                className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 transition hover:border-indigo-200 hover:bg-[var(--color-brand-light)] hover:text-[var(--color-brand)]"
+                className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 transition hover:border-[var(--color-brand)]/30 hover:bg-[var(--color-brand-light)] hover:text-[var(--color-brand)]"
               >
                 {term}
               </button>

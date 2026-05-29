@@ -1,11 +1,11 @@
-# 現貨商城 (Spot Shop)
+# 拓新集創 Nova Crest
 
-獨立現貨銷售網站：買家購物、賣家商品管理，電腦版與手機版 **分開設計**（非單一 RWD 拉伸）。
+匯聚創新選品的現貨電商平台：買家購物、賣家商品管理，電腦版與手機版 **分開設計**（非單一 RWD 拉伸）。
 
 ## 功能
 
 - **買家**：瀏覽商品、購物車、結帳、訂單查詢、會員中心
-- **賣家**：商品 CRUD（名稱、描述、圖片網址、價格、庫存、上下架）
+- **賣家**：商品 CRUD（名稱、描述、圖片、價格、庫存、上下架）
 - **裝置**：依螢幕寬度（≤767px 為手機版）導向 `/` 或 `/m`，可手動切換版本
 - **倉儲**：預留第三方 WMS 串接，見 [docs/WAREHOUSE_INTEGRATION.md](docs/WAREHOUSE_INTEGRATION.md)
 
@@ -16,7 +16,7 @@ src/
 ├── app/              # 路由（desktop 買家、m 手機買家、seller 賣家、api）
 ├── components/       # UI（desktop / mobile / seller / buyer / shared）
 ├── services/         # 業務邏輯
-├── lib/              # 工具、session、驗證
+├── lib/              # 工具、session、品牌設定
 ├── integrations/     # 外部串接（倉儲 stub）
 └── types/
 prisma/               # 資料庫 schema

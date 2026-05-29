@@ -98,7 +98,7 @@ export function ProductSearchBar({
           isHeader
             ? "h-10 max-w-2xl rounded-md border border-gray-300 shadow-sm hover:border-gray-400"
             : "h-9 rounded-lg border border-gray-200 shadow-sm",
-          panelOpen && "border-[var(--color-brand)] ring-2 ring-indigo-500/20 shadow-md"
+          panelOpen && "border-[var(--color-brand)] ring-2 ring-[var(--color-brand)]/20 shadow-md"
         )}
       >
         <div className="flex min-w-0 flex-1 items-center gap-2 px-3">
@@ -136,8 +136,8 @@ export function ProductSearchBar({
           className={cn(
             "shrink-0 border-l font-medium text-white transition-colors",
             isHeader
-              ? "border-indigo-700 bg-[var(--color-brand)] px-5 text-sm hover:bg-[var(--color-brand-dark)]"
-              : "border-indigo-700 bg-[var(--color-brand)] px-4 text-xs hover:bg-[var(--color-brand-dark)]"
+              ? "border-[var(--color-brand-dark)] bg-[var(--color-brand)] px-5 text-sm hover:bg-[var(--color-brand-dark)]"
+              : "border-[var(--color-brand-dark)] bg-[var(--color-brand)] px-4 text-xs hover:bg-[var(--color-brand-dark)]"
           )}
         >
           搜尋

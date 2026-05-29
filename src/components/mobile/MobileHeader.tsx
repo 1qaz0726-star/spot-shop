@@ -1,3 +1,4 @@
+import { BRAND } from "@/lib/brand";
 import { getSession } from "@/lib/session";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
@@ -8,7 +9,7 @@ type Props = {
   showBack?: boolean;
 };
 
-export async function MobileHeader({ title = "現貨商城", backHref, showBack }: Props) {
+export async function MobileHeader({ title = BRAND.nameZh, backHref, showBack }: Props) {
   const session = await getSession();
 
   return (
@@ -19,8 +20,11 @@ export async function MobileHeader({ title = "現貨商城", backHref, showBack 
             <ChevronLeft className="h-6 w-6" />
           </Link>
         ) : (
-          <Link href="/m" className="text-sm font-bold text-[var(--color-brand)]">
-            商城
+          <Link href="/m" className="leading-tight text-[var(--color-brand)]">
+            <span className="block text-sm font-bold">{BRAND.nameZh}</span>
+            <span className="block text-[9px] font-medium tracking-wider opacity-80">
+              {BRAND.nameEn}
+            </span>
           </Link>
         )}
       </div>

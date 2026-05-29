@@ -1,5 +1,6 @@
 import { CatalogToolbar } from "@/components/catalog/CatalogToolbar";
 import { ProductListing } from "@/components/catalog/ProductListing";
+import { BRAND } from "@/lib/brand";
 import { listActiveCategories, listActiveProducts } from "@/services/product.service";
 import Link from "next/link";
 
@@ -18,18 +19,15 @@ export default async function DesktopHomePage({ searchParams }: Props) {
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-8">
-      <section className="mb-6 flex items-center justify-between gap-6 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-8 py-5 text-white">
+      <section className="mb-6 flex items-center justify-between gap-6 overflow-hidden rounded-xl bg-brand-gradient px-8 py-6 text-on-brand-gradient shadow-md">
         <div className="min-w-0">
-          <p className="text-xs font-medium uppercase tracking-wider opacity-90">Spot Shop</p>
-          <h1 className="mt-1 text-xl font-bold md:text-2xl">常態現貨 · 快速出貨</h1>
-          <p className="mt-1 max-w-lg text-sm opacity-90">
-            清楚標價、庫存透明 · 下單後 1–2 工作日出貨
+          <p className="text-xs font-medium tracking-[0.2em] text-[var(--color-accent)]">
+            {BRAND.nameEn}
           </p>
+          <h1 className="mt-1 text-xl font-bold md:text-2xl">{BRAND.tagline}</h1>
+          <p className="mt-1 max-w-lg text-sm opacity-90">{BRAND.heroSub}</p>
         </div>
-        <Link
-          href="#products"
-          className="shrink-0 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50"
-        >
+        <Link href="#products" className="btn-on-brand-gradient shrink-0 rounded-lg px-4 py-2 text-sm">
           立即選購
         </Link>
       </section>
@@ -37,7 +35,7 @@ export default async function DesktopHomePage({ searchParams }: Props) {
       <section id="products">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="text-2xl font-bold">
-            {hasFilter ? "搜尋結果" : "熱銷現貨"}
+            {hasFilter ? "搜尋結果" : "精選好物"}
           </h2>
           {hasFilter && (
             <Link href="/" className="text-sm text-[var(--color-brand)] hover:underline">

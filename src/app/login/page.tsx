@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { BRAND } from "@/lib/brand";
 import { isMobileViewport, toMobilePath } from "@/lib/device";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
@@ -49,8 +50,13 @@ function LoginForm() {
 
   return (
     <div className="mx-auto max-w-md px-6 py-16">
-      <h1 className="text-2xl font-bold">登入</h1>
-      <p className="mt-2 text-sm text-gray-600">示範帳號見下方說明</p>
+      <div className="mb-8 text-center">
+        <p className="text-xs font-medium tracking-[0.2em] text-[var(--color-accent)]">{BRAND.nameEn}</p>
+        <h1 className="mt-1 text-2xl font-bold text-[var(--color-brand)]">{BRAND.nameZh}</h1>
+        <p className="mt-2 text-sm text-gray-600">{BRAND.tagline}</p>
+      </div>
+      <h2 className="text-lg font-semibold">登入</h2>
+      <p className="mt-1 text-sm text-gray-500">示範帳號見下方說明</p>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
         <div>

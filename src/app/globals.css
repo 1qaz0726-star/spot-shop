@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
-/* Spot Shop 品牌色：靛青主色（避開蝦皮橘） */
+/* 拓新集創 Nova Crest — 深海藍主色 + 晨曦金點綴 */
 @theme {
-  /* 手機底部 Tab / 購買列高度（與元件 h-14、py-3+h-10 一致） */
   --spacing-mobile-tab: 3.5rem;
   --spacing-mobile-purchase: 4rem;
-  --color-brand: #4f46e5;
-  --color-brand-dark: #4338ca;
-  --color-brand-light: #eef2ff;
-  --color-accent: #059669;
-  --color-accent-light: #ecfdf5;
-  --color-surface: #f8fafc;
+  --color-brand: #1e3a5f;
+  --color-brand-dark: #0f2744;
+  --color-brand-light: #e8f1fa;
+  --color-accent: #c9963b;
+  --color-accent-dark: #a67c2e;
+  --color-accent-light: #faf3e3;
+  --color-surface: #f6f8fb;
   --color-ink: #0f172a;
-  --color-muted: #64748b;
+  --color-muted: #5c6b7a;
   --font-sans: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 
@@ -20,4 +20,27 @@ body {
   font-family: var(--font-sans);
   color: var(--color-ink);
   background: #fff;
+}
+
+.bg-brand-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-dark) 0%,
+    var(--color-brand) 48%,
+    #1a5f7a 100%
+  );
+}
+
+.text-on-brand-gradient {
+  color: #fff;
+}
+
+.btn-on-brand-gradient {
+  background: #fff;
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.btn-on-brand-gradient:hover {
+  background: var(--color-brand-light);
 }

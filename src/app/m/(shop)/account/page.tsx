@@ -27,7 +27,7 @@ export default async function MobileAccountPage() {
         </div>
       ) : (
         <>
-          <div className="bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-6 text-white">
+          <div className="bg-brand-gradient px-4 py-6 text-on-brand-gradient">
             <p className="text-lg font-bold">{session.name}</p>
             <p className="text-sm opacity-90">{session.email}</p>
           </div>
