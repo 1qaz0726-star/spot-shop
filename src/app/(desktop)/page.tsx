@@ -1,5 +1,9 @@
 import { BrandHomeView } from "@/components/brand/BrandHomeView";
 
 export default function DesktopBrandHomePage() {
-  return <BrandHomeView platform="desktop" />;
+  return (
+    <div className="brand-home-page">
+      <BrandHomeView platform="desktop" />
+    </div>
+  );
 }

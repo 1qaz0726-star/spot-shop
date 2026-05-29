@@ -42,7 +42,7 @@ export async function MobileHeader({
               </Link>
             </div>
             <h1 className="min-w-0 flex-1 truncate text-center text-base font-semibold">{title}</h1>
-            <div className="flex shrink-0 items-center">
+            <div className="flex shrink-0 items-center gap-0.5">
               <BrandMenuDrawer platform="mobile" />
               {showAccount && accountLink}
             </div>
@@ -61,7 +61,7 @@ export async function MobileHeader({
                 {BRAND.nameEn}
               </span>
             </Link>
-            <div className="flex shrink-0 items-center">
+            <div className="flex shrink-0 items-center gap-0.5">
               <BrandMenuDrawer platform="mobile" />
               {showAccount && accountLink}
             </div>

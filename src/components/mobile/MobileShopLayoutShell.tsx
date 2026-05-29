@@ -1,6 +1,6 @@
 "use client";
 
-import { isMobileBrandPage } from "@/lib/mobile-chrome";
+import { isMobileBrandPage } from "@/lib/brand-routes";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { MobileTabBar } from "./MobileTabBar";

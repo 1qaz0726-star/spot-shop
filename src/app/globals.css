@@ -58,6 +58,15 @@ body {
   padding-top: env(safe-area-inset-top, 0px);
 }
 
+/* 品牌首頁背景網格 */
+.brand-home-grid {
+  background-image:
+    linear-gradient(rgba(30, 58, 95, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 58, 95, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, black 20%, transparent 75%);
+}
+
 /* —— 互動動畫（拓新集創） —— */
 @keyframes nc-fade-in {
   from {

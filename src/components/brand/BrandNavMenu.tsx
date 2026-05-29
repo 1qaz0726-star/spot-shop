@@ -1,22 +1,31 @@
-import { SITE_NAV } from "@/lib/brand";
+import type { Locale } from "@/lib/locale";
+import { getSiteNav } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 type Props = {
   platform: "desktop" | "mobile";
+  locale?: Locale;
   className?: string;
   onNavigate?: () => void;
-  /** 漢堡選單展開時，項目依序滑入 */
   animated?: boolean;
 };
 
-export function BrandNavMenu({ platform, className, onNavigate, animated }: Props) {
+export function BrandNavMenu({
+  platform,
+  locale = "zh",
+  className,
+  onNavigate,
+  animated,
+}: Props) {
   const isMobile = platform === "mobile";
+  const items = getSiteNav(locale);
+  const isEn = locale === "en";
 
   return (
-    <nav className={cn("w-full", className)} aria-label="網站導覽">
+    <nav className={cn("w-full", className)} aria-label={isEn ? "Site navigation" : "網站導覽"}>
       <ul className="divide-y divide-gray-200/90 border-y border-gray-200/90">
-        {SITE_NAV.map((item, index) => {
+        {items.map((item, index) => {
           const href = isMobile ? item.hrefMobile : item.hrefDesktop;
           const Icon = item.icon;
           return (
@@ -53,7 +62,9 @@ export function BrandNavMenu({ platform, className, onNavigate, animated }: Prop
                   >
                     {item.labelEn}
                   </span>
-                  <span className="mt-0.5 block text-sm text-gray-600">{item.labelZh}</span>
+                  {!isEn && (
+                    <span className="mt-0.5 block text-sm text-gray-600">{item.labelZh}</span>
+                  )}
                 </span>
               </Link>
             </li>
