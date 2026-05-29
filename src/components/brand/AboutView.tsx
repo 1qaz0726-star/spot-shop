@@ -1,5 +1,6 @@
+import { BRAND_PITCH } from "@/lib/brand-pitch";
 import type { Locale } from "@/lib/locale";
-import { getBrandContent, partnershipPath, shopPathForLocale } from "@/lib/locale";
+import { getBrandContent, isPitchLocale, partnershipPath, shopPathForLocale } from "@/lib/locale";
 import Link from "next/link";
 
 type Props = {
@@ -9,13 +10,13 @@ type Props = {
 
 export function AboutView({ platform, locale = "zh" }: Props) {
   const isMobile = platform === "mobile";
-  const brand = getBrandContent(locale);
-  const isEn = locale === "en";
+  const pitch = isPitchLocale(locale);
+  const brand = pitch ? BRAND_PITCH : getBrandContent("zh");
 
   return (
     <div className={isMobile ? "px-4 py-6" : "mx-auto max-w-3xl px-6 py-12"}>
       <p className="text-xs font-medium tracking-[0.25em] text-[var(--color-accent)]">
-        {brand.nameEn}
+        {pitch ? BRAND_PITCH.productBrand : brand.nameEn}
       </p>
       <h1
         className={
@@ -54,11 +55,8 @@ export function AboutView({ platform, locale = "zh" }: Props) {
         id="contact"
         className="mt-12 scroll-mt-24 rounded-xl bg-[var(--color-brand-light)]/50 p-6"
       >
-        <h2 className="text-lg font-semibold text-[var(--color-brand)]">
-          {isEn ? "Contact" : "聯絡我們"}
-        </h2>
+        <h2 className="text-lg font-semibold text-[var(--color-brand)]">聯絡我們</h2>
         <ul className="mt-4 space-y-2 text-sm text-gray-700">
-          <li>LINE {brand.contact.line}</li>
           <li>
             <a href={`mailto:${brand.contact.email}`} className="text-[var(--color-brand)] hover:underline">
               {brand.contact.email}
@@ -69,15 +67,15 @@ export function AboutView({ platform, locale = "zh" }: Props) {
       </section>
 
       <div className="mt-8 flex flex-wrap gap-4">
-        {isEn && (
+        {pitch && (
           <Link
-            href={partnershipPath("en")}
+            href={partnershipPath(locale)}
             className="text-sm font-medium text-[var(--color-brand)] hover:underline"
           >
-            Partnership details →
+            查看授權說明 →
           </Link>
         )}
-        {!isEn && (
+        {!pitch && (
           <Link
             href={shopPathForLocale(locale, isMobile)}
             className="text-sm font-medium text-[var(--color-brand)] hover:underline"

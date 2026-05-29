@@ -1,5 +1,5 @@
 import { BrandMenuDrawer } from "@/components/brand/BrandMenuDrawer";
-import { BRAND_EN } from "@/lib/brand-en";
+import { BRAND_PITCH, PITCH_BASE } from "@/lib/brand-pitch";
 import Link from "next/link";
 
 type Props = {
@@ -13,7 +13,7 @@ export function EnSiteHeader({ platform, title, showBack, backHref }: Props) {
   const isMobile = platform === "mobile";
 
   return (
-    <header className="safe-area-top sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-sm">
+    <header className="safe-area-top sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div
         className={
           isMobile
@@ -26,22 +26,22 @@ export function EnSiteHeader({ platform, title, showBack, backHref }: Props) {
             href={backHref}
             className="shrink-0 text-sm text-[var(--color-brand)] hover:underline"
           >
-            ← Back
+            ← 返回
           </Link>
         ) : (
-          <Link href="/en" className="min-w-0 flex-1 leading-tight">
+          <Link href={PITCH_BASE} className="shrink-0 leading-tight">
             <span
               className={
                 isMobile
                   ? "block text-sm font-bold text-[var(--color-brand)]"
-                  : "block text-lg font-bold text-[var(--color-brand)]"
+                  : "block text-lg font-bold tracking-tight text-[var(--color-brand)]"
               }
             >
-              {BRAND_EN.nameEn}
+              {BRAND_PITCH.nameZh}
             </span>
             {!isMobile && (
-              <span className="block text-[10px] tracking-widest text-[var(--color-muted)]">
-                {BRAND_EN.nameZh}
+              <span className="block text-[10px] font-medium tracking-widest text-[var(--color-muted)]">
+                {BRAND_PITCH.nameEn}
               </span>
             )}
           </Link>
@@ -64,7 +64,7 @@ export function EnSiteHeader({ platform, title, showBack, backHref }: Props) {
         )}
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
-          <BrandMenuDrawer platform={platform} locale="en" />
+          <BrandMenuDrawer platform={platform} locale="zh-TW" />
         </div>
       </div>
     </header>

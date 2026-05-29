@@ -1,6 +1,7 @@
 import { BrandHomeBackdrop } from "@/components/brand/BrandHomeBackdrop";
+import { BRAND_PITCH } from "@/lib/brand-pitch";
 import type { Locale } from "@/lib/locale";
-import { aboutPath, getBrandContent, shopPathForLocale } from "@/lib/locale";
+import { aboutPath, getBrandContent, isPitchLocale, partnershipPath, shopPathForLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -11,8 +12,8 @@ type Props = {
 
 export function BrandHomeView({ platform, locale = "zh" }: Props) {
   const isMobile = platform === "mobile";
-  const brand = getBrandContent(locale);
-  const isEn = locale === "en";
+  const pitch = isPitchLocale(locale);
+  const brand = pitch ? BRAND_PITCH : getBrandContent("zh");
   const shopHref = shopPathForLocale(locale, isMobile);
   const aboutHref = aboutPath(locale, isMobile);
 
@@ -30,7 +31,7 @@ export function BrandHomeView({ platform, locale = "zh" }: Props) {
       <div
         className={cn(
           "relative z-10 w-full text-center nc-animate-slide-up",
-          isMobile ? "max-w-md" : "max-w-xl"
+          isMobile ? "max-w-md" : pitch ? "max-w-2xl" : "max-w-xl"
         )}
       >
         <div
@@ -43,7 +44,7 @@ export function BrandHomeView({ platform, locale = "zh" }: Props) {
           <div className="mx-auto mb-5 flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
             <p className="text-xs font-medium tracking-[0.3em] text-[var(--color-accent)]">
-              {brand.nameEn}
+              {pitch ? BRAND_PITCH.productBrand : brand.nameEn}
             </p>
             <span className="h-px w-8 bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
           </div>
@@ -54,21 +55,32 @@ export function BrandHomeView({ platform, locale = "zh" }: Props) {
               isMobile ? "text-3xl" : "text-4xl lg:text-[2.75rem] lg:leading-tight"
             )}
           >
-            {isEn ? brand.nameEn : brand.nameZh}
+            {pitch ? (
+              <>
+                <span className="block">{BRAND_PITCH.productName}</span>
+                <span className="mt-2 block text-2xl font-semibold lg:text-3xl">台灣嘖嘖代理授權洽談</span>
+              </>
+            ) : (
+              brand.nameZh
+            )}
           </h1>
 
-          {!isEn && (
-            <p className="mt-1 text-sm tracking-wide text-[var(--color-muted)]">{brand.nameEn}</p>
-          )}
+          <p className="mt-1 text-sm tracking-wide text-[var(--color-muted)]">
+            {pitch ? `${brand.nameZh} · ${brand.nameEn}` : brand.nameEn}
+          </p>
 
           <p className={cn("mt-3 font-medium text-gray-700", isMobile ? "text-sm" : "text-lg")}>
             {brand.tagline}
           </p>
 
+          {pitch && (
+            <p className="mt-2 text-sm text-gray-500">{BRAND_PITCH.heroSub}</p>
+          )}
+
           <p
             className={cn(
               "mx-auto mt-4 leading-relaxed text-gray-500",
-              isMobile ? "max-w-xs text-sm" : "max-w-md text-sm"
+              isMobile ? "max-w-xs text-sm" : pitch ? "max-w-lg text-sm" : "max-w-md text-sm"
             )}
           >
             {brand.about.intro}
@@ -79,16 +91,16 @@ export function BrandHomeView({ platform, locale = "zh" }: Props) {
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            {isEn ? (
+            {pitch ? (
               <Link
-                href={aboutHref}
+                href={partnershipPath("zh-TW")}
                 className={cn(
                   "nc-interactive nc-press inline-flex rounded-lg bg-[var(--color-brand)] font-semibold text-white",
                   "shadow-md shadow-[var(--color-brand)]/25 hover:bg-[var(--color-brand-dark)] hover:shadow-lg",
                   isMobile ? "px-8 py-2.5 text-sm" : "px-10 py-3 text-sm"
                 )}
               >
-                Partnership inquiry
+                閱讀授權說明
               </Link>
             ) : (
               <Link
@@ -103,10 +115,10 @@ export function BrandHomeView({ platform, locale = "zh" }: Props) {
               </Link>
             )}
             <Link
-              href={isEn ? "/en/partnership" : aboutHref}
+              href={aboutHref}
               className="nc-interactive text-sm font-medium text-[var(--color-brand)] underline-offset-4 hover:underline"
             >
-              {isEn ? "How we work" : "認識我們"}
+              {pitch ? "認識拓新集創" : "認識我們"}
             </Link>
           </div>
         </div>

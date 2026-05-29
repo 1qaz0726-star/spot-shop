@@ -1,5 +1,5 @@
 import type { Locale } from "@/lib/locale";
-import { getSiteNav } from "@/lib/locale";
+import { getSiteNav, isPitchLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -20,10 +20,10 @@ export function BrandNavMenu({
 }: Props) {
   const isMobile = platform === "mobile";
   const items = getSiteNav(locale);
-  const isEn = locale === "en";
+  const pitch = isPitchLocale(locale);
 
   return (
-    <nav className={cn("w-full", className)} aria-label={isEn ? "Site navigation" : "網站導覽"}>
+    <nav className={cn("w-full", className)} aria-label="網站導覽">
       <ul className="divide-y divide-gray-200/90 border-y border-gray-200/90">
         {items.map((item, index) => {
           const href = isMobile ? item.hrefMobile : item.hrefDesktop;
@@ -56,13 +56,13 @@ export function BrandNavMenu({
                 <span className="min-w-0 flex-1">
                   <span
                     className={cn(
-                      "block font-medium tracking-[0.2em] text-[var(--color-brand)]",
+                      "block font-medium tracking-[0.15em] text-[var(--color-brand)]",
                       isMobile ? "text-xs" : "text-sm"
                     )}
                   >
-                    {item.labelEn}
+                    {pitch ? item.labelZh : item.labelEn}
                   </span>
-                  {!isEn && (
+                  {!pitch && (
                     <span className="mt-0.5 block text-sm text-gray-600">{item.labelZh}</span>
                   )}
                 </span>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const MQ = "(max-width: 767px)";
 
-/** 英文站 /en 依螢幕寬度套用 mobile / desktop 排版 */
+/** /zh-TW 洽談站依螢幕寬度套用 mobile / desktop 排版 */
 export function useBrandPlatform() {
   const [platform, setPlatform] = useState<"desktop" | "mobile">("desktop");
 

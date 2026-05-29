@@ -11,7 +11,7 @@ export function EnHomePageClient() {
     <>
       <EnSiteHeader platform={platform} />
       <div className="brand-home-page">
-        <BrandHomeView platform={platform} locale="en" />
+        <BrandHomeView platform={platform} locale="zh-TW" />
       </div>
     </>
   );

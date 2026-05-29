@@ -14,6 +14,12 @@ import {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/en" || pathname.startsWith("/en/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/en(?=\/|$)/, "/zh-TW");
+    return NextResponse.redirect(url, 308);
+  }
+
   if (shouldSkipViewportRouting(pathname)) {
     return NextResponse.next();
   }

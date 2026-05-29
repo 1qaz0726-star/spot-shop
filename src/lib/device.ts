@@ -12,7 +12,7 @@ export function isMobilePath(pathname: string): boolean {
 }
 
 export function shouldSkipViewportRouting(pathname: string): boolean {
-  const SKIP = ["/api", "/login", "/_next", "/favicon", "/en"];
+  const SKIP = ["/api", "/login", "/_next", "/favicon", "/zh-TW"];
   return SKIP.some((p) => pathname.startsWith(p));
 }
 
@@ -21,7 +21,7 @@ export function toMobilePath(pathname: string): string {
   if (pathname.startsWith("/m")) return pathname;
   if (pathname.startsWith("/api") || pathname.startsWith("/login")) return pathname;
   if (pathname.startsWith("/seller")) return `/m${pathname}`;
-  if (pathname.startsWith("/en")) return pathname;
+  if (pathname.startsWith("/zh-TW")) return pathname;
   return `/m${pathname}`;
 }
 

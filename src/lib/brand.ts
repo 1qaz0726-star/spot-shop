@@ -26,8 +26,7 @@ export const BRAND = {
     ],
   },
   contact: {
-    line: "@novacrest",
-    email: "service@novacrest.tw",
+    email: "beicheng0528@gmail.com",
     hours: "週一至週五 09:00–18:00",
   },
 } as const;

@@ -16,8 +16,11 @@ export function DesktopFooter() {
         <div>
           <h4 className="mb-3 font-semibold text-gray-900">客服</h4>
           <ul className="space-y-2">
-            <li>LINE {BRAND.contact.line}</li>
-            <li>{BRAND.contact.email}</li>
+            <li>
+              <a href={`mailto:${BRAND.contact.email}`} className="hover:text-[var(--color-brand)]">
+                {BRAND.contact.email}
+              </a>
+            </li>
             <li>{BRAND.contact.hours}</li>
           </ul>
         </div>

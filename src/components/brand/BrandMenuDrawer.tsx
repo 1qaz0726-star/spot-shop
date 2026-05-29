@@ -62,7 +62,7 @@ export function BrandMenuDrawer({ platform, locale = "zh", className }: Props) {
           "hover:bg-[var(--color-brand-light)]",
           className
         )}
-        aria-label={locale === "en" ? "Open menu" : "開啟選單"}
+        aria-label="開啟選單"
         aria-expanded={open}
       >
         <Menu
@@ -76,7 +76,7 @@ export function BrandMenuDrawer({ platform, locale = "zh", className }: Props) {
           className="fixed inset-0 z-[200]"
           role="dialog"
           aria-modal="true"
-          aria-label={locale === "en" ? "Site menu" : "網站選單"}
+          aria-label="網站選單"
         >
           <div
             className={cn(
@@ -98,7 +98,7 @@ export function BrandMenuDrawer({ platform, locale = "zh", className }: Props) {
                 type="button"
                 onClick={close}
                 className="nc-interactive nc-press rounded-lg p-2 text-gray-600 hover:bg-gray-100"
-                aria-label={locale === "en" ? "Close menu" : "關閉選單"}
+                aria-label="關閉選單"
               >
                 <X className="h-6 w-6" />
               </button>

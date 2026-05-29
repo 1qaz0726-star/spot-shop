@@ -32,7 +32,12 @@ export default async function MobileProductPage({ params }: Props) {
           <ul className="mt-2 space-y-1 text-gray-600">
             <li>· 現貨 1–2 工作日出貨</li>
             <li>· 7 天鑑賞期（未拆封）</li>
-            <li>· 客服 LINE {BRAND.contact.line}</li>
+            <li>
+              · 客服信箱{" "}
+              <a href={`mailto:${BRAND.contact.email}`} className="text-[var(--color-brand)]">
+                {BRAND.contact.email}
+              </a>
+            </li>
           </ul>
         </div>
 

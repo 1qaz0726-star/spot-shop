@@ -1,4 +1,4 @@
-import { BRAND_EN } from "@/lib/brand-en";
+import { BRAND_PITCH } from "@/lib/brand-pitch";
 import { aboutPath } from "@/lib/locale";
 import Link from "next/link";
 
@@ -8,12 +8,12 @@ type Props = {
 
 export function PartnershipView({ platform }: Props) {
   const isMobile = platform === "mobile";
-  const p = BRAND_EN.partnership;
+  const p = BRAND_PITCH.partnership;
 
   return (
     <div className={isMobile ? "px-4 py-6" : "mx-auto max-w-3xl px-6 py-12"}>
       <p className="text-xs font-medium tracking-[0.25em] text-[var(--color-accent)]">
-        {BRAND_EN.nameEn}
+        {BRAND_PITCH.productName} · {BRAND_PITCH.productBrand}
       </p>
       <h1
         className={
@@ -42,16 +42,18 @@ export function PartnershipView({ platform }: Props) {
 
       <div className="mt-8 flex flex-wrap gap-4">
         <a
-          href={`mailto:${BRAND_EN.contact.email}?subject=Nova%20Crest%20Partnership%20Inquiry`}
+          href={`mailto:${BRAND_PITCH.contact.email}?subject=${encodeURIComponent(
+            "SUSUBAG 台灣嘖嘖代理授權洽談 — 拓新集創"
+          )}`}
           className="nc-interactive nc-press inline-flex rounded-lg bg-[var(--color-brand)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[var(--color-brand-dark)]"
         >
-          Email us
+          來信洽談
         </a>
         <Link
-          href={aboutPath("en", isMobile)}
+          href={aboutPath("zh-TW", isMobile)}
           className="inline-flex items-center text-sm font-medium text-[var(--color-brand)] hover:underline"
         >
-          About & contact →
+          關於我們與聯絡方式 →
         </Link>
       </div>
     </div>
