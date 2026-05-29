@@ -1,10 +1,5 @@
-import { MobileTabBar } from "@/components/mobile/MobileTabBar";
+import { MobileShopLayoutShell } from "@/components/mobile/MobileShopLayoutShell";
 
 export default function MobileShopLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen pb-[calc(var(--spacing-mobile-tab)+env(safe-area-inset-bottom,0px))]">
-      {children}
-      <MobileTabBar />
-    </div>
-  );
+  return <MobileShopLayoutShell>{children}</MobileShopLayoutShell>;
 }

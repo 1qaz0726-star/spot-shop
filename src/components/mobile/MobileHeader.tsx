@@ -1,5 +1,7 @@
+import { BrandMenuDrawer } from "@/components/brand/BrandMenuDrawer";
 import { BRAND } from "@/lib/brand";
 import { getSession } from "@/lib/session";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
@@ -7,37 +9,63 @@ type Props = {
   title?: string;
   backHref?: string;
   showBack?: boolean;
+  /** 品牌首頁／關於頁不顯示右上角「我」 */
+  showAccount?: boolean;
 };
 
-export async function MobileHeader({ title = BRAND.nameZh, backHref, showBack }: Props) {
+export async function MobileHeader({
+  title = BRAND.nameZh,
+  backHref,
+  showBack,
+  showAccount = true,
+}: Props) {
   const session = await getSession();
 
+  const accountLink = session ? (
+    <Link href="/m/account" className="px-1 text-xs text-gray-600">
+      我
+    </Link>
+  ) : (
+    <Link href="/login" className="px-1 text-xs font-medium text-[var(--color-brand)]">
+      登入
+    </Link>
+  );
+
   return (
-    <header className="sticky top-0 z-50 flex h-12 items-center justify-between border-b border-gray-100 bg-white px-3 safe-area-top">
-      <div className="flex w-10 items-center">
+    <header className="safe-area-top sticky top-0 z-50 border-b border-gray-100 bg-white">
+      <div className="flex h-11 items-center gap-1 px-2">
         {showBack && backHref ? (
-          <Link href={backHref} className="p-1 text-gray-700">
-            <ChevronLeft className="h-6 w-6" />
-          </Link>
+          <>
+            <div className="flex w-9 shrink-0 items-center">
+              <Link href={backHref} className="p-1 text-gray-700" aria-label="返回">
+                <ChevronLeft className="h-6 w-6" />
+              </Link>
+            </div>
+            <h1 className="min-w-0 flex-1 truncate text-center text-base font-semibold">{title}</h1>
+            <div className="flex shrink-0 items-center">
+              <BrandMenuDrawer platform="mobile" />
+              {showAccount && accountLink}
+            </div>
+          </>
         ) : (
-          <Link href="/m" className="leading-tight text-[var(--color-brand)]">
-            <span className="block text-sm font-bold">{BRAND.nameZh}</span>
-            <span className="block text-[9px] font-medium tracking-wider opacity-80">
-              {BRAND.nameEn}
-            </span>
-          </Link>
-        )}
-      </div>
-      <h1 className="flex-1 truncate text-center text-base font-semibold">{title}</h1>
-      <div className="flex w-10 justify-end">
-        {session ? (
-          <Link href="/m/account" className="text-xs text-gray-600">
-            我
-          </Link>
-        ) : (
-          <Link href="/login" className="text-xs font-medium text-[var(--color-brand)]">
-            登入
-          </Link>
+          <>
+            <Link
+              href="/m"
+              className={cn(
+                "min-w-0 flex-1 truncate whitespace-nowrap pl-1 text-left leading-none text-[var(--color-brand)]",
+                "text-[15px] font-bold tracking-tight"
+              )}
+            >
+              {BRAND.nameZh}
+              <span className="ml-1.5 text-[10px] font-medium tracking-wide text-[var(--color-muted)]">
+                {BRAND.nameEn}
+              </span>
+            </Link>
+            <div className="flex shrink-0 items-center">
+              <BrandMenuDrawer platform="mobile" />
+              {showAccount && accountLink}
+            </div>
+          </>
         )}
       </div>
     </header>

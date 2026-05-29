@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 export function MobileHomeServices() {
   return (
     <Link
-      href="/m"
+      href="/m/shop"
       className="flex items-center gap-2 border-b border-[var(--color-brand-dark)]/20 bg-brand-gradient px-3 py-2 text-on-brand-gradient active:opacity-90"
     >
       <span className="shrink-0 rounded bg-[var(--color-accent)]/90 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">

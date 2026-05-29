@@ -1,4 +1,4 @@
-import { BRAND } from "@/lib/brand";
+import { BRAND, SITE_NAV } from "@/lib/brand";
 import Link from "next/link";
 
 export function DesktopFooter() {
@@ -22,15 +22,20 @@ export function DesktopFooter() {
           </ul>
         </div>
         <div>
-          <h4 className="mb-3 font-semibold text-gray-900">關於 {BRAND.nameZh}</h4>
+          <h4 className="mb-3 font-semibold text-gray-900">網站導覽</h4>
           <ul className="space-y-2">
+            {SITE_NAV.map((item) => (
+              <li key={item.hrefDesktop}>
+                <Link href={item.hrefDesktop} className="hover:underline">
+                  {item.labelZh}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link href="/account" className="hover:underline">
                 會員中心
               </Link>
             </li>
-            <li>隱私權政策</li>
-            <li>服務條款</li>
           </ul>
         </div>
         <div>

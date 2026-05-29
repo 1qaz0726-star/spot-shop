@@ -39,8 +39,146 @@ body {
   background: #fff;
   color: var(--color-brand);
   font-weight: 600;
+  transition:
+    background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .btn-on-brand-gradient:hover {
   background: var(--color-brand-light);
+  box-shadow: 0 4px 14px rgba(15, 39, 68, 0.12);
+}
+
+.btn-on-brand-gradient:active {
+  transform: scale(0.97);
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* —— 互動動畫（拓新集創） —— */
+@keyframes nc-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nc-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes nc-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nc-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nc-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes nc-menu-item {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nc-ease {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nc-animate-fade-in {
+  animation: nc-fade-in 0.28s var(--nc-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+
+.nc-animate-fade-out {
+  animation: nc-fade-out 0.22s ease both;
+}
+
+.nc-animate-slide-up {
+  animation: nc-slide-up 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nc-animate-slide-down {
+  animation: nc-slide-down 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nc-animate-scale-in {
+  animation: nc-scale-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nc-animate-menu-item {
+  animation: nc-menu-item 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  opacity: 0;
+}
+
+.nc-interactive {
+  transition:
+    color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+}
+
+.nc-press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nc-animate-fade-in,
+  .nc-animate-fade-out,
+  .nc-animate-slide-up,
+  .nc-animate-slide-down,
+  .nc-animate-scale-in,
+  .nc-animate-menu-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .nc-interactive,
+  .nc-press:active {
+    transition: none !important;
+    transform: none !important;
+  }
 }

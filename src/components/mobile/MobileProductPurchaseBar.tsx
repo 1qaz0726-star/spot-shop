@@ -67,11 +67,14 @@ export function MobileProductPurchaseBar({ productId, stock, slug }: Props) {
             aria-label="減少數量"
             disabled={quantity <= 1 || loading !== null}
             onClick={() => setQuantity((q) => clampQty(q - 1))}
-            className="flex h-10 w-9 items-center justify-center text-gray-600 disabled:opacity-40"
+            className="nc-interactive nc-press flex h-10 w-9 items-center justify-center rounded-md text-gray-600 hover:bg-white disabled:opacity-40"
           >
             <Minus className="h-4 w-4" />
           </button>
-          <span className="min-w-[2rem] text-center text-sm font-semibold tabular-nums">
+          <span
+            key={quantity}
+            className="min-w-[2rem] text-center text-sm font-semibold tabular-nums nc-animate-scale-in"
+          >
             {quantity}
           </span>
           <button
@@ -79,7 +82,7 @@ export function MobileProductPurchaseBar({ productId, stock, slug }: Props) {
             aria-label="增加數量"
             disabled={quantity >= maxQty || loading !== null}
             onClick={() => setQuantity((q) => clampQty(q + 1))}
-            className="flex h-10 w-9 items-center justify-center text-gray-600 disabled:opacity-40"
+            className="nc-interactive nc-press flex h-10 w-9 items-center justify-center rounded-md text-gray-600 hover:bg-white disabled:opacity-40"
           >
             <Plus className="h-4 w-4" />
           </button>

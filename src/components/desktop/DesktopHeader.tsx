@@ -1,4 +1,4 @@
-import { HeaderSearch } from "@/components/catalog/HeaderSearch";
+import { BrandMenuDrawer } from "@/components/brand/BrandMenuDrawer";
 import { BRAND } from "@/lib/brand";
 import { getSession } from "@/lib/session";
 import Link from "next/link";
@@ -9,7 +9,7 @@ export async function DesktopHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
-      <div className="mx-auto flex h-14 max-w-7xl items-center gap-6 px-6">
+      <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-6">
         <Link href="/" className="shrink-0 leading-tight">
           <span className="block text-lg font-bold tracking-tight text-[var(--color-brand)]">
             {BRAND.nameZh}
@@ -18,36 +18,35 @@ export async function DesktopHeader() {
             {BRAND.nameEn}
           </span>
         </Link>
-        <div className="flex min-w-0 flex-1 justify-center px-2">
-          <HeaderSearch />
-        </div>
-        <nav className="flex items-center gap-6 text-sm text-gray-700">
-          <Link href="/orders" className="hover:text-[var(--color-brand)]">
+
+        <div className="ml-auto flex items-center gap-4 text-sm text-gray-700">
+          <Link href="/orders" className="hidden hover:text-[var(--color-brand)] sm:inline">
             我的訂單
           </Link>
           <Link href="/cart" className="flex items-center gap-1 hover:text-[var(--color-brand)]">
             <ShoppingCart className="h-4 w-4" />
-            購物車
+            <span className="hidden sm:inline">購物車</span>
           </Link>
           {session ? (
-            <span className="flex items-center gap-1 text-gray-600">
+            <span className="hidden items-center gap-1 text-gray-600 sm:flex">
               <User className="h-4 w-4" />
               {session.name}
             </span>
           ) : (
-            <Link href="/login" className="font-medium text-[var(--color-brand)]">
+            <Link href="/login" className="hidden font-medium text-[var(--color-brand)] sm:inline">
               登入
             </Link>
           )}
           {session?.role === "SELLER" && (
             <Link
               href="/seller"
-              className="rounded-full bg-[var(--color-brand-dark)] px-3 py-1 text-white hover:bg-[var(--color-brand)]"
+              className="hidden rounded-full bg-[var(--color-brand-dark)] px-3 py-1 text-white hover:bg-[var(--color-brand)] sm:inline"
             >
               賣家中心
             </Link>
           )}
-        </nav>
+          <BrandMenuDrawer platform="desktop" />
+        </div>
       </div>
     </header>
   );

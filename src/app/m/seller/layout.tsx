@@ -18,8 +18,8 @@ export default async function MobileSellerLayout({ children }: { children: React
             <p className="text-xs font-medium text-[var(--color-brand)]">{BRAND.nameZh}</p>
             <p className="text-[10px] text-gray-400">賣家中心 · {session.name}</p>
           </div>
-          <Link href="/m" className="text-xs text-[var(--color-brand)]">
-            回{BRAND.nameZh}
+          <Link href="/m/shop" className="text-xs text-[var(--color-brand)]">
+            回商城
           </Link>
         </div>
       </header>

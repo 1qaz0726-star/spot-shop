@@ -94,7 +94,7 @@ export function ProductSearchBar({
       <form
         onSubmit={submit}
         className={cn(
-          "flex w-full overflow-hidden bg-white transition-shadow",
+          "nc-interactive flex w-full overflow-hidden bg-white",
           isHeader
             ? "h-10 max-w-2xl rounded-md border border-gray-300 shadow-sm hover:border-gray-400"
             : "h-9 rounded-lg border border-gray-200 shadow-sm",
@@ -147,7 +147,7 @@ export function ProductSearchBar({
       {panelOpen && (
         <div
           className={cn(
-            "absolute left-0 right-0 z-[100] mt-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg",
+            "nc-animate-slide-down absolute left-0 right-0 z-[100] mt-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg",
             isHeader && "max-w-2xl"
           )}
         >

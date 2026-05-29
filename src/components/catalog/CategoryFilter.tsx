@@ -39,11 +39,11 @@ export function CategoryFilter({ categories, basePath, variant = "desktop" }: Pr
             type="button"
             onClick={() => select(c)}
             className={cn(
-              "shrink-0 rounded-full border text-sm transition",
+              "nc-interactive nc-press shrink-0 rounded-full border text-sm",
               variant === "mobile" ? "px-3 py-1 text-xs" : "px-4 py-1.5",
               active
-                ? "border-[var(--color-brand)] bg-[var(--color-brand-light)] font-medium text-[var(--color-brand)]"
-                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                ? "scale-[1.02] border-[var(--color-brand)] bg-[var(--color-brand-light)] font-medium text-[var(--color-brand)] shadow-sm"
+                : "border-gray-200 bg-white text-gray-700 hover:border-[var(--color-brand)]/25 hover:bg-[var(--color-brand-light)]/30"
             )}
           >
             {c}

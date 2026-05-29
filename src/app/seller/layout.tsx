@@ -29,8 +29,8 @@ export default async function SellerLayout({ children }: { children: React.React
           </Link>
         </nav>
         <div className="border-t border-gray-100 p-3 text-sm">
-          <Link href="/" className="text-[var(--color-brand)] hover:underline">
-            返回 {BRAND.nameZh}
+          <Link href="/shop" className="text-[var(--color-brand)] hover:underline">
+            返回商城
           </Link>
         </div>
       </aside>

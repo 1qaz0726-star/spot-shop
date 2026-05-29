@@ -12,7 +12,10 @@ type Props = {
 export function ProductCard({ product, href, layout = "grid" }: Props) {
   if (layout === "row") {
     return (
-      <Link href={href} className="flex gap-3 rounded-xl border border-gray-100 bg-white p-3 shadow-sm">
+      <Link
+        href={href}
+        className="nc-interactive group flex gap-3 rounded-xl border border-gray-100 bg-white p-3 shadow-sm hover:-translate-y-0.5 hover:shadow-md"
+      >
         <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-gray-100">
           {product.imageUrl ? (
             <Image src={product.imageUrl} alt={product.name} fill className="object-cover" sizes="96px" />
@@ -32,7 +35,7 @@ export function ProductCard({ product, href, layout = "grid" }: Props) {
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition hover:shadow-md"
+      className="nc-interactive group flex h-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm hover:-translate-y-1 hover:shadow-lg"
     >
       <div className="relative aspect-square shrink-0 overflow-hidden bg-gray-50">
         {product.imageUrl ? (
@@ -40,7 +43,7 @@ export function ProductCard({ product, href, layout = "grid" }: Props) {
             src={product.imageUrl}
             alt={product.name}
             fill
-            className="object-cover transition group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             sizes="(max-width: 768px) 50vw, 25vw"
           />
         ) : (
