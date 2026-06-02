@@ -14,33 +14,24 @@ type Props = {
 };
 
 export function BrandLogoLink({ href, nameZh, nameEn, compact, hideSubtitle, className }: Props) {
-  const logoSize = compact ? 28 : 40;
+  const logoSize = compact ? 32 : 44;
 
   return (
     <Link
       href={href}
-      className={cn("flex shrink-0 items-center gap-2 leading-tight", className)}
+      className={cn("flex shrink-0 items-center gap-2.5 leading-tight", className)}
     >
-      <span
+      <Image
+        src="/logo-mark-circle.png"
+        alt=""
+        width={logoSize}
+        height={logoSize}
         className={cn(
-          "flex shrink-0 items-center justify-center overflow-hidden rounded-full",
-          "bg-white shadow-sm ring-1 ring-[var(--color-brand)]/15",
+          "shrink-0 rounded-full object-cover shadow-sm",
           compact ? "h-8 w-8" : "h-10 w-10 sm:h-11 sm:w-11"
         )}
-        aria-hidden
-      >
-        <Image
-          src="/icon-192.png"
-          alt=""
-          width={logoSize}
-          height={logoSize}
-          className={cn(
-            "object-contain",
-            compact ? "h-[72%] w-[72%]" : "h-[76%] w-[76%]"
-          )}
-          priority
-        />
-      </span>
+        priority
+      />
       <span className="min-w-0">
         <span
           className={cn(
