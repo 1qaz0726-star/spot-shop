@@ -21,17 +21,26 @@ export function BrandLogoLink({ href, nameZh, nameEn, compact, hideSubtitle, cla
       href={href}
       className={cn("flex shrink-0 items-center gap-2 leading-tight", className)}
     >
-      <Image
-        src="/icon-192.png"
-        alt=""
-        width={logoSize}
-        height={logoSize}
+      <span
         className={cn(
-          "shrink-0 object-contain",
-          compact ? "h-7 w-7" : "h-9 w-9 sm:h-10 sm:w-10"
+          "flex shrink-0 items-center justify-center overflow-hidden rounded-full",
+          "bg-white shadow-sm ring-1 ring-[var(--color-brand)]/15",
+          compact ? "h-8 w-8" : "h-10 w-10 sm:h-11 sm:w-11"
         )}
-        priority
-      />
+        aria-hidden
+      >
+        <Image
+          src="/icon-192.png"
+          alt=""
+          width={logoSize}
+          height={logoSize}
+          className={cn(
+            "object-contain",
+            compact ? "h-[72%] w-[72%]" : "h-[76%] w-[76%]"
+          )}
+          priority
+        />
+      </span>
       <span className="min-w-0">
         <span
           className={cn(

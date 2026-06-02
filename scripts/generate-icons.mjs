@@ -25,12 +25,12 @@ const emblem = sharp(source).extract({
   height: Math.min(cropSize, h),
 });
 
-const whiteBg = { r: 255, g: 255, b: 255, alpha: 1 };
+const transparentBg = { r: 0, g: 0, b: 0, alpha: 0 };
 
 async function writePng(outPath, size) {
   await emblem
     .clone()
-    .resize(size, size, { fit: "contain", background: whiteBg })
+    .resize(size, size, { fit: "contain", background: transparentBg })
     .png()
     .toFile(outPath);
   console.log("wrote", outPath);
