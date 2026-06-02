@@ -1,3 +1,4 @@
+import { BrandLogoLink } from "@/components/brand/BrandLogoLink";
 import { BrandMenuDrawer } from "@/components/brand/BrandMenuDrawer";
 import { BRAND_PITCH, PITCH_BASE } from "@/lib/brand-pitch";
 import Link from "next/link";
@@ -29,22 +30,13 @@ export function EnSiteHeader({ platform, title, showBack, backHref }: Props) {
             ← 返回
           </Link>
         ) : (
-          <Link href={PITCH_BASE} className="shrink-0 leading-tight">
-            <span
-              className={
-                isMobile
-                  ? "block text-sm font-bold text-[var(--color-brand)]"
-                  : "block text-lg font-bold tracking-tight text-[var(--color-brand)]"
-              }
-            >
-              {BRAND_PITCH.nameZh}
-            </span>
-            {!isMobile && (
-              <span className="block text-[10px] font-medium tracking-widest text-[var(--color-muted)]">
-                {BRAND_PITCH.nameEn}
-              </span>
-            )}
-          </Link>
+          <BrandLogoLink
+            href={PITCH_BASE}
+            nameZh={BRAND_PITCH.nameZh}
+            nameEn={BRAND_PITCH.nameEn}
+            compact={isMobile}
+            hideSubtitle={isMobile}
+          />
         )}
 
         {title && (

@@ -1,7 +1,7 @@
+import { BrandLogoLink } from "@/components/brand/BrandLogoLink";
 import { BrandMenuDrawer } from "@/components/brand/BrandMenuDrawer";
 import { BRAND } from "@/lib/brand";
 import { getSession } from "@/lib/session";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
@@ -49,18 +49,13 @@ export async function MobileHeader({
           </>
         ) : (
           <>
-            <Link
+            <BrandLogoLink
               href="/m"
-              className={cn(
-                "min-w-0 flex-1 truncate whitespace-nowrap pl-1 text-left leading-none text-[var(--color-brand)]",
-                "text-[15px] font-bold tracking-tight"
-              )}
-            >
-              {BRAND.nameZh}
-              <span className="ml-1.5 text-[10px] font-medium tracking-wide text-[var(--color-muted)]">
-                {BRAND.nameEn}
-              </span>
-            </Link>
+              nameZh={BRAND.nameZh}
+              nameEn={BRAND.nameEn}
+              compact
+              className="min-w-0 flex-1 pl-1"
+            />
             <div className="flex shrink-0 items-center gap-0.5">
               <BrandMenuDrawer platform="mobile" />
               {showAccount && accountLink}
