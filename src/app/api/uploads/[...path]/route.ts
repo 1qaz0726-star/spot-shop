@@ -1,4 +1,4 @@
-import { getProductsUploadDir } from "@/lib/upload";
+import { getProductsUploadDir, getUploadsBucket } from "@/lib/upload";
 import { readFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
@@ -24,16 +24,31 @@ export async function GET(_req: Request, { params }: Params) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
+  const ext = path.extname(safe).toLowerCase();
+  const headers = {
+    "Content-Type": MIME[ext] || "application/octet-stream",
+    "Cache-Control": "public, max-age=31536000, immutable",
+  };
+
+  const bucket = await getUploadsBucket();
+  if (bucket) {
+    const object = await bucket.get(`products/${safe}`);
+    if (!object) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    const data = await object.arrayBuffer();
+    return new NextResponse(data, {
+      headers: {
+        "Content-Type": object.httpMetadata?.contentType || headers["Content-Type"],
+        "Cache-Control": headers["Cache-Control"],
+      },
+    });
+  }
+
   const filePath = path.join(getProductsUploadDir(), safe);
   try {
     const data = await readFile(filePath);
-    const ext = path.extname(safe).toLowerCase();
-    return new NextResponse(data, {
-      headers: {
-        "Content-Type": MIME[ext] || "application/octet-stream",
-        "Cache-Control": "public, max-age=31536000, immutable",
-      },
-    });
+    return new NextResponse(data, { headers });
   } catch {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }

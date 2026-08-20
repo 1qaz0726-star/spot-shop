@@ -7,7 +7,7 @@ import {
   getSearchHistory,
   removeSearchHistory,
 } from "@/lib/search-history";
-import { cn } from "@/lib/utils";
+import { asJsonRecord, cn } from "@/lib/utils";
 import { Search, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -46,7 +46,10 @@ export function ProductSearchBar({
   useEffect(() => {
     fetch("/api/search/hints")
       .then((r) => r.json())
-      .then((data: { hot?: string[] }) => setHotSearches(data.hot ?? []))
+      .then((data) => {
+        const hot = asJsonRecord(data).hot;
+        setHotSearches(Array.isArray(hot) ? hot.filter((x): x is string => typeof x === "string") : []);
+      })
       .catch(() => setHotSearches([]));
   }, []);
 

@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  engineType = "client"
 }
 
 datasource db {
@@ -46,7 +47,7 @@ model Address {
   id        String  @id @default(cuid())
   userId    String
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  label     String  @default("預設")
+  label     String  @default("???")
   recipient String
   phone     String
   city      String
@@ -105,7 +106,7 @@ model Order {
   shippingPhone   String
   shippingAddress String
   note            String?
-  /// 預留：第三方倉儲出貨單號（串接 API 後填入）
+  /// ??????????????????????API ??????
   warehouseRef    String?
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt

@@ -7,3 +7,7 @@ node_modules
 .DS_Store
 data/uploads
 public/uploads
+.open-next
+.wrangler
+cloudflare-env.d.ts
+.dev.vars

@@ -4,6 +4,7 @@ import {
   MAX_IMAGE_BYTES,
   ensureProductsUploadDir,
   getProductsUploadDir,
+  getUploadsBucket,
 } from "@/lib/upload";
 import { Role } from "@prisma/client";
 import { randomUUID } from "crypto";
@@ -37,10 +38,18 @@ export async function POST(req: Request) {
       file.type
     ] ?? ".jpg";
 
-  await ensureProductsUploadDir();
   const filename = `${randomUUID()}${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(path.join(getProductsUploadDir(), filename), buffer);
+  const bucket = await getUploadsBucket();
+
+  if (bucket) {
+    await bucket.put(`products/${filename}`, buffer, {
+      httpMetadata: { contentType: file.type },
+    });
+  } else {
+    await ensureProductsUploadDir();
+    await writeFile(path.join(getProductsUploadDir(), filename), buffer);
+  }
 
   const url = `/api/uploads/products/${filename}`;
   return NextResponse.json({ url });

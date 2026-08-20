@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { BRAND } from "@/lib/brand";
 import { isMobileViewport, toMobilePath } from "@/lib/device";
+import { apiErrorMessage, asJsonRecord } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
@@ -30,17 +31,16 @@ function LoginForm() {
 
     setLoading(false);
     if (!res.ok) {
-      const data = await res.json();
-      setError(data.error ?? "登入失敗");
+      setError(apiErrorMessage(await res.json(), "登入失敗"));
       return;
     }
 
-    const { user } = await res.json();
+    const user = asJsonRecord(await res.json()).user as { role?: string } | undefined;
     const mobile = typeof window !== "undefined" && isMobileViewport(window.innerWidth);
 
-    if (user.role === "SELLER" && next.startsWith("/seller")) {
+    if (user?.role === "SELLER" && next.startsWith("/seller")) {
       router.push(mobile ? toMobilePath(next) : next);
-    } else if (user.role === "SELLER") {
+    } else if (user?.role === "SELLER") {
       router.push(mobile ? "/m/seller" : "/seller");
     } else {
       router.push(mobile && !next.startsWith("/m") ? toMobilePath(next) : next);

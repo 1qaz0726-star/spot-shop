@@ -5,6 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function asJsonRecord(data: unknown): Record<string, unknown> {
+  return data && typeof data === "object" ? (data as Record<string, unknown>) : {};
+}
+
+export function apiErrorMessage(data: unknown, fallback: string): string {
+  const err = asJsonRecord(data).error;
+  return typeof err === "string" && err.trim() ? err : fallback;
+}
+
 export function formatPrice(amount: number): string {
   return `NT$ ${amount.toLocaleString("zh-TW")}`;
 }

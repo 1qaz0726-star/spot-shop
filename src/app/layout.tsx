@@ -3,6 +3,8 @@ import { BRAND } from "@/lib/brand";
 import "./globals.css";
 import { ViewportRouter } from "@/components/shared/ViewportRouter";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: BRAND.title,
   description: BRAND.description,

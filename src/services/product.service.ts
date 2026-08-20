@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db/prisma";
+import { getDb } from "@/lib/db/prisma";
 import { slugify } from "@/lib/utils";
 import type { ProductDetail, ProductListItem } from "@/types/product";
 import { ProductStatus } from "@prisma/client";
@@ -29,6 +29,7 @@ export type ProductListFilters = {
 };
 
 export async function listActiveCategories(): Promise<string[]> {
+  const prisma = await getDb();
   const rows = await prisma.product.groupBy({
     by: ["category"],
     where: { status: ProductStatus.ACTIVE, category: { not: null } },
@@ -42,6 +43,7 @@ export async function listActiveCategories(): Promise<string[]> {
 export async function listActiveProducts(
   filters?: string | ProductListFilters
 ): Promise<ProductListItem[]> {
+  const prisma = await getDb();
   const category =
     typeof filters === "string" ? filters : filters?.category?.trim() || undefined;
   const q = typeof filters === "string" ? undefined : filters?.q?.trim() || undefined;
@@ -67,6 +69,7 @@ export async function listActiveProducts(
 }
 
 export async function getProductBySlug(slug: string): Promise<ProductDetail | null> {
+  const prisma = await getDb();
   const p = await prisma.product.findFirst({
     where: { slug, status: ProductStatus.ACTIVE },
     include: {
@@ -84,6 +87,7 @@ export async function getProductBySlug(slug: string): Promise<ProductDetail | nu
 }
 
 export async function listSellerProducts(sellerId: string) {
+  const prisma = await getDb();
   return prisma.product.findMany({
     where: { sellerId },
     include: { images: { orderBy: { sortOrder: "asc" }, take: 1 } },
@@ -92,6 +96,7 @@ export async function listSellerProducts(sellerId: string) {
 }
 
 export async function getSellerProduct(sellerId: string, productId: string) {
+  const prisma = await getDb();
   return prisma.product.findFirst({
     where: { id: productId, sellerId },
     include: { images: { orderBy: { sortOrder: "asc" } } },
@@ -110,6 +115,7 @@ export async function createProduct(
     images: string[];
   }
 ) {
+  const prisma = await getDb();
   let slug = slugify(data.name);
   const exists = await prisma.product.findUnique({ where: { slug } });
   if (exists) slug = `${slug}-${Date.now().toString(36)}`;
@@ -145,6 +151,7 @@ export async function updateProduct(
     images: string[];
   }>
 ) {
+  const prisma = await getDb();
   const existing = await prisma.product.findFirst({
     where: { id: productId, sellerId },
   });
@@ -179,6 +186,7 @@ export async function updateProduct(
 }
 
 export async function deleteProduct(sellerId: string, productId: string) {
+  const prisma = await getDb();
   const existing = await prisma.product.findFirst({
     where: { id: productId, sellerId },
   });

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { apiErrorMessage } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -36,8 +37,7 @@ export function CheckoutForm({ defaultValues, successRedirect }: Props) {
 
     setLoading(false);
     if (!res.ok) {
-      const data = await res.json();
-      alert(data.error ?? "下單失敗");
+      alert(apiErrorMessage(await res.json(), "下單失敗"));
       return;
     }
     router.push(successRedirect);

@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { apiErrorMessage, asJsonRecord, cn } from "@/lib/utils";
 import { ImagePlus, Loader2, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -23,12 +23,12 @@ export function ProductImageUpload({ value, onChange }: Props) {
         const fd = new FormData();
         fd.append("file", file);
         const res = await fetch("/api/upload", { method: "POST", body: fd });
-        const data = await res.json();
+        const data = asJsonRecord(await res.json());
         if (!res.ok) {
-          alert(data.error ?? "上傳失敗");
+          alert(apiErrorMessage(data, "上傳失敗"));
           continue;
         }
-        next.push(data.url);
+        if (typeof data.url === "string") next.push(data.url);
       }
       onChange(next);
     } finally {

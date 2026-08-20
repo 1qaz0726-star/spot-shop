@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { prisma } from "@/lib/db/prisma";
+import { getDb } from "@/lib/db/prisma";
 import type { Role } from "@prisma/client";
 import { cache } from "react";
 
@@ -14,6 +14,7 @@ export type SessionUser = {
 
 /** 同一請求內只查一次 DB，避免 Header + 頁面重複查詢 */
 export const getSession = cache(async (): Promise<SessionUser | null> => {
+  const prisma = await getDb();
   const jar = await cookies();
   const userId = jar.get(COOKIE)?.value;
   if (!userId) return null;

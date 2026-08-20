@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db/prisma";
+import { getDb } from "@/lib/db/prisma";
 import { generateOrderNo } from "@/lib/utils";
 import type { OrderSummary } from "@/types/order";
 import { OrderStatus } from "@prisma/client";
@@ -13,6 +13,7 @@ export async function createOrderFromCart(
     note?: string;
   }
 ) {
+  const prisma = await getDb();
   const cart = await getCart(userId);
   if (cart.length === 0) throw new Error("CART_EMPTY");
 
@@ -58,6 +59,7 @@ export async function createOrderFromCart(
 }
 
 export async function listUserOrders(userId: string): Promise<OrderSummary[]> {
+  const prisma = await getDb();
   const orders = await prisma.order.findMany({
     where: { userId },
     include: { items: true },
@@ -76,6 +78,7 @@ export async function listUserOrders(userId: string): Promise<OrderSummary[]> {
 }
 
 export async function getOrderDetail(userId: string, orderId: string) {
+  const prisma = await getDb();
   return prisma.order.findFirst({
     where: { id: orderId, userId },
     include: { items: true },

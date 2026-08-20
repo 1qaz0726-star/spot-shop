@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/Button";
 import { ProductImageUpload } from "@/components/seller/ProductImageUpload";
+import { apiErrorMessage } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -61,8 +62,7 @@ export function ProductForm({
 
     setLoading(false);
     if (!res.ok) {
-      const data = await res.json();
-      alert(typeof data.error === "string" ? data.error : "儲存失敗");
+      alert(apiErrorMessage(await res.json(), "儲存失敗"));
       return;
     }
 

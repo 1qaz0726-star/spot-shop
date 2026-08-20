@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db/prisma";
+import { getDb } from "@/lib/db/prisma";
 import { sessionCookieOptions } from "@/lib/session";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
@@ -11,6 +11,7 @@ const schema = z.object({
 });
 
 export async function POST(req: Request) {
+  const prisma = await getDb();
   const body = await req.json();
   const parsed = schema.safeParse(body);
   if (!parsed.success) {

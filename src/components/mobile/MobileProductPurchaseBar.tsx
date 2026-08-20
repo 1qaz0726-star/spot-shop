@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { apiErrorMessage, cn } from "@/lib/utils";
 import { Minus, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -37,8 +37,7 @@ export function MobileProductPurchaseBar({ productId, stock, slug }: Props) {
         return;
       }
       if (!res.ok) {
-        const data = await res.json();
-        alert(data.error ?? "操作失敗");
+        alert(apiErrorMessage(await res.json(), "操作失敗"));
         return;
       }
       if (mode === "buyNow") {

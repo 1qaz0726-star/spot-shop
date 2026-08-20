@@ -1,7 +1,8 @@
-import { prisma } from "@/lib/db/prisma";
+import { getDb } from "@/lib/db/prisma";
 import { ProductStatus } from "@prisma/client";
 
 export async function getCart(userId: string) {
+  const prisma = await getDb();
   return prisma.cartItem.findMany({
     where: { userId },
     include: {
@@ -14,6 +15,7 @@ export async function getCart(userId: string) {
 }
 
 export async function addToCart(userId: string, productId: string, quantity = 1) {
+  const prisma = await getDb();
   const product = await prisma.product.findFirst({
     where: { id: productId, status: ProductStatus.ACTIVE },
   });
@@ -29,6 +31,7 @@ export async function addToCart(userId: string, productId: string, quantity = 1)
 }
 
 export async function updateCartQuantity(userId: string, productId: string, quantity: number) {
+  const prisma = await getDb();
   if (quantity <= 0) {
     await prisma.cartItem.deleteMany({ where: { userId, productId } });
     return null;
@@ -43,6 +46,7 @@ export async function updateCartQuantity(userId: string, productId: string, quan
 }
 
 export async function clearCart(userId: string) {
+  const prisma = await getDb();
   await prisma.cartItem.deleteMany({ where: { userId } });
 }
 
